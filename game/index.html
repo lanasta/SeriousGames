@@ -1,0 +1,73 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Example Domain</title>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script type="text/javascript" src = "jquery-2.2.0.js"></script>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        width: 100%;
+        height: auto;
+        background: orange;
+        color: white;
+    }
+    a:link, a:visited {
+        color: #38488f;
+        text-decoration: none;
+    }
+    @media (max-width: 700px) {
+        body {
+            background-color: #fff;
+        }
+        div {
+            width: auto;
+            margin: 0 auto;
+            border-radius: 0;
+            padding: 1em;
+        }
+    }
+
+    #hbb{
+      width: 50%:
+      height: auto;
+      margin: 0 auto;
+      border: black 5px solid;
+    }
+
+    #hbb img{
+      width: 35%;
+      margin: 1% 32.5% 0;
+      height: auto;
+      cursor: pointer;
+    }
+    </style>
+    <script>
+    window.onload = function() {
+      $("#hbb img").click(function(){
+         if ($(this).attr("src") == "hbb1.png"){
+          $(this).attr("src","hbb2.png");
+         }
+         else{
+           $(this).attr("src","hbb1.png");
+         }
+      });
+    }
+
+    </script>
+</head>
+
+<body>
+<div>
+    <h1>Neurosurgery Game</h1>
+    <div id = "hbb"><img src="hbb1.png"></div>
+</div>
+</body>
+</html>
