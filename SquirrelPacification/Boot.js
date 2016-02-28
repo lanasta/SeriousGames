@@ -5,7 +5,7 @@ SquirrelPacification.Boot = function(game) {};
 SquirrelPacification.Boot.prototype = {
 	preload: function() {
         this.load.image('preloaderBar', 'images/loader_bar.png');
-        this.load.image('titleimage', 'images/TitleImage.png');
+        this.load.image('titleimage', 'images/TitleBG.png');
     },
 
 	create: function() {
@@ -20,9 +20,8 @@ SquirrelPacification.Boot.prototype = {
 		this.scale.setScreenSize(true);  // true will force screen resize no matter what
 
 		this.input.addPointer();
-		this.stage.backgroundColor = '#171642';
+//		this.stage.backgroundColor = '#171642';
 
         this.state.start('Preloader');
 	}
-
 };
