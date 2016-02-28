@@ -3,6 +3,11 @@
 <head>
 	<meta charset="utf-8">
 	<title>Squirrel Pacification</title>
+    <script src="libs/phaser.js"></script>
+    <script src="Boot.js"></script>
+    <script src="Preloader.js"></script>
+    <!-- <script src="StartMenu.js"></script>
+    <script src="Game.js"></script> -->
 	<style>
 		body {
 			padding: 0;
@@ -12,6 +17,18 @@
 	</style>
 </head>
 <body>
+    <div id="gameContainer"></div>
+    <script src="libs/phaser.js"></script>
 
+    <script type="text/javascript">
+	   window.onload = function() {
+	       var game = new Phaser.Game(540, 960, Phaser.AUTO, 'gameContainer');
+           game.state.add('Boot', BunnyDefender.Boot); // adding state to the game
+		   game.state.add('Preloader', BunnyDefender.Preloader); // use Preloader inside game
+		   game.state.add('StartMenu', BunnyDefender.StartMenu);
+		   game.state.add('Game', BunnyDefender.Game); // just like this we can add leaderboards, game over
+		   game.state.start('Boot'); // start game by passing boot first then feed to preloader
+	};
+</script>
 </body>
 </html>
