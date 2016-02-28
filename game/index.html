@@ -3,21 +3,22 @@
 <html>
 <head>
     <title>Example Domain</title>
-
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src = "jquery-2.2.0.js"></script>
     <style type="text/css">
     body {
         margin: 0;
         padding: 0;
-        font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "Bubblegum Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         width: 100%;
         height: auto;
-        background: orange;
         color: white;
+        font-size: 15px;
+        background: #7CBCF2;
     }
     a:link, a:visited {
         color: #38488f;
@@ -35,29 +36,164 @@
         }
     }
 
-    #hbb{
-      width: 50%:
+    .outer{
+      width: 100%;
       height: auto;
       margin: 0 auto;
-      border: black 5px solid;
+      background: orange;
     }
 
     #hbb img{
-      width: 35%;
-      margin: 1% 32.5% 0;
+      width: 28%;
+      margin: 1% 32% 0;
       height: auto;
+      position: absolute;
+      padding: 0 3%;
+      border: 25px inset pink;
+      background: lightblue;
+      box-shadow: 2px 2px 20px gray;
+    }
+
+    #carrot img{
+      width: 10%:
+      height: auto;
+      z-index: 2;
+      margin: 36% 38% 0;
+      position: absolute;
       cursor: pointer;
     }
+
+    #cupcake img{
+      max-width: 100px;
+      height: auto;
+      z-index: 2;
+      margin: 36% 54% 0;
+      position: absolute;
+      cursor: pointer;
+    }
+
+    #counter{
+      float:left;
+      position:absolute;
+      z-index: 1000;
+      margin-left: 100px;
+    }
+
+    #counter p{
+      font-size: 8em;
+    }
+
+    #counter .gainOrLose{
+      font-size:65%;
+    }
+
+    #healthBar{
+      float:right;
+      position:absolute;
+      z-index:1000;
+      margin-left: 1100px;
+      width: 5%;
+      height: 200px;
+      margin-top: 100px;
+      border-radius: 25px;
+      border: 5px solid black;
+      background:green;
+      display: inline-block;
+    }
+
+    #unhealthy{
+      background:red;
+      height: 150px;
+      border-radius: 25px;
+    }
+
+    #label{
+      float:right;
+      position:absolute;
+      z-index:1000;
+      margin-top: 50px;
+      margin-left: 1110px;
+    }
+
+    #label h3:nth-child(2){
+      margin-top: 240px;
+    }
+
+
     </style>
     <script>
     window.onload = function() {
-      $("#hbb img").click(function(){
-         if ($(this).attr("src") == "hbb1.png"){
-          $(this).attr("src","hbb2.png");
+      var mouthOpen = false;
+      var count = 0;
+      var alive = true;
+
+      $("#cupcake img").click(function(){
+        if (!mouthOpen && alive){
+         if ($("#hbb img").attr("src") !== "hbb2.png"){
+          $("#hbb img").attr("src","hbb2.png");
+          count += 1;
+          mouthOpen = true;
+          var timeOpen = Math.floor((Math.random() * 5) + 2);
+          var disgustedTime = 0.4;
+          if (count > 3){
+            disgustedTime = 0.3;
+          }
+          if (count > 7){
+            disgustedTime = 0.2;
+          }
+          var timeBeforeDisgusted = timeOpen - disgustedTime;
+          setTimeout(function () {
+            if (alive){
+              $("#hbb img").attr("src","hbb3.png");
+            }
+            setTimeout(function () {
+              mouthOpen = false;
+              if (alive){
+                $("#hbb img").attr("src","hbb1.png");
+              }
+            }, disgustedTime*1000);
+          }, timeBeforeDisgusted*1000);
          }
+       }
          else{
-           $(this).attr("src","hbb1.png");
+           var unhealth = parseInt($("#unhealthy").height());
+           var heightToSet = unhealth + 3;
+           if (heightToSet >= $("#healthBar").height()){
+             $("#carrot").hide();
+             $("#cupcake").hide();
+             $("#hbb img").attr("src","dead.png");
+             mouthOpen = false;
+             alive = false;
+           }
+           $("#unhealthy").css("height",heightToSet);
+           counter -= 2;
+           $("#counter").html("<p>"+counter+"<span class='gainOrLose'>--</span></p>");
+           $(".gainOrLose").css("color","red");
          }
+      });
+      var counter = 0;
+      $("#carrot img").click(function(){
+          if (mouthOpen && alive){
+            counter+=1;
+            $("#counter").html("<p>"+counter+"<span class='gainOrLose'>++</span></p>");
+            $(".gainOrLose").css("color","green");
+            var unhealth = parseInt($("#unhealthy").height());
+            var heightToSet = unhealth - 1;
+            $("#unhealthy").css("height",heightToSet);
+          }
+          else{
+            counter -= 1;
+            $("#counter").html("<p>"+counter+"<span class='gainOrLose'>--</span></p>");
+            $(".gainOrLose").css("color","red");
+            $("#hbb img").attr("src","tantrum.gif");
+            $("#cupcake img").hide();
+            $("#carrot img").hide();
+            setTimeout(function(){
+              $("#hbb img").attr("src","hbb1.png");
+              $("#cupcake img").show();
+              $("#carrot img").show();
+            }, 2500);
+          }
       });
     }
 
@@ -66,8 +202,16 @@
 
 <body>
 <div>
-    <h1>Neurosurgery Game</h1>
-    <div id = "hbb"><img src="hbb1.png"></div>
+    <h2 style="text-align:center;">Bunny Hoo Hoo won't eat her veggies...<br>Help us feed her some!!</h2>
+    <div class = "outer">
+      <div id = "counter"><p>0</p></div>
+      <div id = "hbb"><img src="hbb1.png"></div>
+      <div id="carrot"><img id="carrot" src="Carrot.png"></div>
+      <div id="cupcake"><img id="cupcake" src="cupcake.png"></div>
+      <div id ="label"><h3 id="good">Healthy</h3><h3 id="bad">Bout to Die</h3></div>
+      <div id="healthBar"><div id="unhealthy"></div></div>
+  </div>
+
 </div>
 </body>
 </html>
