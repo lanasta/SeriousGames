@@ -83,6 +83,7 @@ function update() {
     
  player.rotation += 0.01;
  player.rotation = game.physics.arcade.angleToPointer(player);
+ this.physics.arcade.overlap(bullets, squirrels, collisionHandler);
 
     if (game.input.activePointer.isDown)
     {
