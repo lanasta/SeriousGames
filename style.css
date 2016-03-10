@@ -1,0 +1,98 @@
+@import url('http://fonts.googleapis.com/css?family=Black+Ops+One');
+
+body {
+    background-color: #f0f0f2;
+    background: url("images/sky.jpg");
+    background-size: cover;
+    background-repeat: none;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.left{
+  width: 45%;
+  float: left;
+  height: auto;
+  display: inline-block;
+}
+
+#title{
+  font-family: "Black Ops One",cursive;
+  padding-left: 50px;
+  margin: 0 auto;
+  font-size: 3.3em;
+  top: 0;
+}
+
+#title h1{
+  text-shadow: 5px 5px 5px black;
+}
+
+#title img{
+    width: 100px;
+    height: auto;
+    margin-left: 180px;
+    margin-top: -70px;
+}
+
+a:link, a:visited {
+    color: #38488f;
+    text-decoration: none;
+}
+
+.right{
+  float: left;
+  width: 50%;
+  height: auto;
+  display: inline-block;
+  font-family: "Black Ops One",cursive;
+  font-size: 15px;
+  margin-top: 100px;
+}
+
+.empty{
+  width: 5%;
+  margin: 0 auto;
+  height: auto;
+  display: inline-block;
+}
+
+@media (max-width: 700px) {
+    body {
+        background-color: #fff;
+    }
+    div {
+        width: auto;
+        margin: 0 auto;
+        border-radius: 0;
+        padding: 0.2em;
+    }
+    #homePage {
+        float: right;
+    }
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}

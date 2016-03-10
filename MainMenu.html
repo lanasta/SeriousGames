@@ -9,26 +9,26 @@
 
     <style type="text/css">
     body {
-        margin: center;
-        padding-top: 300px;
-        padding-left: 500px;
         font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
         color: white;
-        background-image: url("http://www.wellingtonregional.com/sites/wellingtonregional.com/files/brain.jpg");
+        background-image: url("images/brain.jpg");
         background-repeat: no-repeat;
-        /*background-size: cover;
-        -moz-background-size: cover;
-        -o-background-size: cover;
-        background-position: center;*/
         background-size: cover;
         background-position: top;
     }
     a:link, a:visited {
-        color: red;
+        border-bottom: 2px solid black;
         text-decoration: none;
+        color: inherit;
     }
-    div {
-
+    .box {
+      background: rgba(0,0,0,0.5);
+      color: white;
+      width: 50%;
+      height: auto;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 25px;
     }
     </style>
 
@@ -36,8 +36,11 @@
 
 <body>
 <div>
+    <div class = "box">
     <h1>Welcome to the Neurosurgery Game</h1>
     <p>Click <a href="GameHomePage.html">here</a> to play!</p>
+
+    </div>
 </div>
 </body>
 </html>
