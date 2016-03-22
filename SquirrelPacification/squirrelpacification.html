@@ -51,15 +51,13 @@ function create() {
     
     for (var i=0; i < totalSquirrels; i++) {
         squirrels = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel'); 
+        game.physics.enable(squirrels, Phaser.Physics.ARCADE);
+        squirrels.enableBody = true;
+        squirrels.physicsBodyType = Phaser.Physics.ARCADE;
+        squirrels.physicsBodyType.immovable = true; 
+        squirrels.body.collideWorldBounds = true;
+        squirrelGang = game.add.group();
     }
-    
-    game.physics.enable(squirrels, Phaser.Physics.ARCADE);
-    squirrels.enableBody = true;
-    squirrels.physicsBodyType = Phaser.Physics.ARCADE;
-    squirrels.physicsBodyType.immovable = true; 
-    squirrels.body.collideWorldBounds = true;
-    squirrelGang = game.add.group();
-    
 //    squirrelGang = this.add.group(); // create a new group called bunny group
 //    squirrelGang.enableBody = true; // enableBody allows bunnies to interact with other objects we create
 //    for(var i=0; i<totalSquirrels; i++) { // builds individual bunnies and adds to group
@@ -103,11 +101,11 @@ function update() {
         fire();
     }
     
-    game.physics.arcade.overlap(bullets, squirrel, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+    game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
 }
     
 function fire() {
-    if (game.time.now > nextFire && bullets.countDead() > 0)
+    if (game.time.now > nextFire && bullets.countDead() > 0 && totalSquirrels > 0)
     {
         nextFire = game.time.now + fireRate;
         var bullet = bullets.getFirstDead();
