@@ -37,7 +37,7 @@ var star;
 var squirrel;
 var squirrels;
 var squirrelGang;
-var totalSquirrels = 20;
+var totalSquirrels = 2;
     
 function create() {
     
@@ -56,8 +56,11 @@ function create() {
         squirrels.physicsBodyType = Phaser.Physics.ARCADE;
         squirrels.physicsBodyType.immovable = true; 
         squirrels.body.collideWorldBounds = true;
+        squirrels.body.customSeparateX = true;
+        squirrels.body.customSeparateY = true;
         squirrelGang = game.add.group();
     }
+    
 //    squirrelGang = this.add.group(); // create a new group called bunny group
 //    squirrelGang.enableBody = true; // enableBody allows bunnies to interact with other objects we create
 //    for(var i=0; i<totalSquirrels; i++) { // builds individual bunnies and adds to group
@@ -85,7 +88,7 @@ function create() {
     //player.body.gravity.y = 600;                                         // set player gravity
     player.body.collideWorldBounds = true;                               // whether player should collide with world boundary or not
     player.body.immovable = false;
-    player.body.allowRotation = true;
+    player.body.allowRotation = false;
     //player.animations.add('left', [0, 1, 2, 3], 10, true);// player animation frame when player walks left
     //player.animations.add('right', [5, 6, 7, 8], 10, true);    
     star = game.add.image(300, 300, 'cup');
@@ -94,8 +97,8 @@ function create() {
 }
     
 function update() {
-    player.rotation += 0.01;
-    player.rotation = game.physics.arcade.angleToPointer(player);
+//    player.rotation += 0.01;
+//    player.rotation = game.physics.arcade.angleToPointer(player);
 
     if (game.input.activePointer.isDown){
         fire();
@@ -109,7 +112,7 @@ function fire() {
     {
         nextFire = game.time.now + fireRate;
         var bullet = bullets.getFirstDead();
-        bullet.reset(player.x + 100, player.y + 30);
+        bullet.reset(player.x - 100, player.y - 65);
         game.physics.arcade.moveToPointer(bullet, 350);   
     }
 }
@@ -124,9 +127,9 @@ function processHandler (bullets, squirrels) {
     return true;
 }
 
-function collisionHandler (squirrels, bullets) {
-    if (squirrels.exists) {
-        squirrels.kill();
+function collisionHandler (s, bullets) {
+    if (s.exists) {
+        s.kill();
         totalSquirrels--;
     }
 }
