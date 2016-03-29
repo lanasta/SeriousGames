@@ -40,11 +40,19 @@ var totalSquirrels = 2;
     
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
+<<<<<<< HEAD
     game.physics.arcade.gravity.y=0
+=======
+    game.physics.arcade.gravity.y=13
+
+>>>>>>> origin/master
     game.add.image(0, 0, 'background');
     game.add.image(0, 650, 'ground');
     game.add.image(0, 110, 'tree');
-    game.add.image(400, 600, 'cup');
+    star = game.add.sprite(100, 600, 'cup');
+    game.physics.enable(star);
+    star.enableBody = true;
+    star.body.collideWorldBounds = true;
     
     for (var i=0; i < totalSquirrels; i++) {
         squirrels = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel'); 
@@ -101,7 +109,14 @@ function update() {
         fire();
     }
     
+<<<<<<< HEAD
+    game.physics.arcade.overlap(bullets,squirrels,collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+    game.physics.arcade.overlap(squirrels, star, collisionHandler, null, this);
+
+
+=======
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+>>>>>>> origin/master
 }
     
 function fire() {
@@ -135,6 +150,12 @@ function collisionHandler (s, bullets) {
         totalSquirrels--;
     }
 }
+<<<<<<< HEAD
+    
+function collisionHandler (squirrels, star) {
+    star.kill();
+}
+=======
 
 //function assignSquirrelMovement(s) {
 //    sposition = Math.floor(this.rnd.realInRange(50, this.world.width-50)); // position that bunny wants to go to / 50 pixels left and right of screen
@@ -161,6 +182,7 @@ function collisionHandler (s, bullets) {
 //    s.animations.play('Rest', 24, true);
 //    this.assignSquirrelMovement(s); // pass bunny to assignBunnyMovement and start process for each bunny
 //}
+>>>>>>> origin/master
 </script>
 
 </body>
