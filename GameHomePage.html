@@ -12,11 +12,26 @@
     <script src="typed.js/js/typed.js"></script>
     <script>
   $(function(){
-      $(".right").typed({
+    var typedSpeed = -50;
+    function show(){
+      $("#selectYes").show();
+    }
+    $("#selectYes").hide();
+    function load(){
+      $("#missionMessage").typed({
         strings:
         ["Black Ops 420 is a secret crack squad of specialists gathered specifically to prevent disasters that could threaten the Earth. The squad is under direct command of the President of the United States, Baroque Omama and answer to no other authority in the world. You have just been recruited to the Black Ops 420 squad. Your task is to make sure that you divert the disaster that is about to befall our Earth. Are you ready?"],
-        typeSpeed: 0
+        typeSpeed: typedSpeed
       });
+      setTimeout(show, 5000 );
+      $(document).click(function() {
+          typedSpeed = -100;
+      });
+    }
+    load();
+
+
+
   });
 </script>
 </head>
@@ -25,7 +40,7 @@
 <div>
   <div class="left">
     <div id ="title">
-        <h1>BAROQUE OHMAMA'S MISSION</h1>
+        <h1>BAROQUE OMAMA'S MISSION</h1>
         <img src="images/obama.png">
     </div>
   </div>
@@ -42,6 +57,13 @@
     <p>Get ready to learn!</p>
     <p>Play <a href="LevelOne.html">Level One</a></p>
     <p>Go back to the <a href="MainMenu.html">Main Menu</a></p>-->
+     <div id="missionMessage">
+     </div>
+     <div id="selectYes">
+      <ul>
+        <a href="game/index.html"><li>Yes</li></a>
+      </ul>
+    </div>
   </div>
   <div class="empty"></div>
 </div>
