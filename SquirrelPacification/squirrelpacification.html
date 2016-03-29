@@ -34,14 +34,13 @@ var fireRate = 100;
 var nextFire = 3;
 var star;
 var squirrel;
-var squirrels;
+//var squirrels;
 var squirrelGang;
 var totalSquirrels = 2;
     
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y=0
-
     game.add.image(0, 0, 'background');
     game.add.image(0, 650, 'ground');
     game.add.image(0, 110, 'tree');
@@ -108,17 +107,22 @@ function update() {
 function fire() {
     if (game.time.now > nextFire && bullets.countDead() > 0 && totalSquirrels > 0)
     {
-        nextFire = game.time.now + fireRate;
-        var bullet = bullets.getFirstDead();
-        bullet.reset(player.x - 100, player.y - 65);
-        game.physics.arcade.moveToPointer(bullet, 350);   
+        bullet = bullets.getFirstDead(false);
+        if (bullet) {
+            nextFire = game.time.now + fireRate;
+            bullet.reset(player.x - 100, player.y - 65);
+            game.physics.arcade.moveToPointer(bullet, 350);  
+        } 
     }
 }
 
 function render() {
-    game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
-    game.debug.spriteInfo(player, 32, 450);
-    game.debug.spriteInfo(star, 32, 450); 
+	for (var i = 0; i < totalSquirrels; i++ ) {
+		game.debug.body(squirrels.children[i]);
+	}
+//     game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
+//     game.debug.spriteInfo(player, 32, 450);
+//     game.debug.spriteInfo(star, 32, 450); 
 }
 
 function processHandler (bullets, squirrels) {
