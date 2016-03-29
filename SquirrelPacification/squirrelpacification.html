@@ -41,12 +41,15 @@ var squirrelGang;
 function create() {
     
     game.physics.startSystem(Phaser.Physics.ARCADE);
-    game.physics.arcade.gravity.y=0
+    game.physics.arcade.gravity.y=13
 
     game.add.image(0, 0, 'background');
     game.add.image(0, 650, 'ground');
     game.add.image(0, 110, 'tree');
-    game.add.image(400, 600, 'cup');
+    star = game.add.sprite(100, 600, 'cup');
+    game.physics.enable(star);
+    star.enableBody = true;
+    star.body.collideWorldBounds = true;
     
     squirrels = game.add.sprite(100, 300, 'squirrel');
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
@@ -90,6 +93,7 @@ function update() {
     }
     
     game.physics.arcade.overlap(bullets,squirrels,collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+    game.physics.arcade.overlap(squirrels, star, collisionHandler, null, this);
 
 
 }
@@ -118,6 +122,10 @@ function processHandler (bullets, squirrels ) {
 
 function collisionHandler (squirrels, bullets) {
         squirrels.kill();
+}
+    
+function collisionHandler (squirrels, star) {
+    star.kill();
 }
 </script>
 
