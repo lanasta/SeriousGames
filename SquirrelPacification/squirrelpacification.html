@@ -107,15 +107,15 @@ function update() {
     }
     
     game.physics.arcade.overlap(bullets,squirrels,collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
-    game.physics.arcade.overlap(squirrels, star, collisionHandler, null, this);
+    game.physics.arcade.overlap(squirrels, star, cupCollision, null, this);
 
-    game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+//    game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
 }
     
 function fire() {
     if (game.time.now > nextFire && bullets.countDead() > 0 && totalSquirrels > 0)
     {
-        bullet = bullets.getFirstDead(false);
+        bullet = bullets.getFirstExists(false);
         if (bullet) {
             nextFire = game.time.now + fireRate;
             bullet.reset(player.x - 100, player.y - 65);
@@ -139,12 +139,13 @@ function processHandler (bullets, squirrels) {
 
 function collisionHandler (s, bullets) {
     if (s.exists) {
+        bullets.kill();
         s.kill();
         totalSquirrels--;
     }
 }
     
-function collisionHandler (squirrels, star) {
+function cupCollision (squirrels, star) {
     star.kill();
 }
 
