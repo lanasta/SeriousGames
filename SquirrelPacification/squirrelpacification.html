@@ -51,7 +51,9 @@ function create() {
     star.enableBody = true;
     star.body.collideWorldBounds = true;
     
- //   for (var i=0; i < totalSquirrels; i++) {
+    for (var i=0; i < totalSquirrels; i++) {
+        squirrels - game.add.group();
+        game.squirrels.enableBody = true;
         squirrels = game.add.sprite(game.world.width, game.world.randomY, 'squirrel');
         game.physics.enable(squirrels, Phaser.Physics.ARCADE);
         squirrels.enableBody = true;
@@ -60,52 +62,52 @@ function create() {
         squirrels.body.collideWorldBounds = true;
         squirrels.body.customSeparateX = true;
         squirrels.body.customSeparateY = true;
-        
-        s1 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
-        game.physics.enable(s1, Phaser.Physics.ARCADE);
-        s1.enableBody = true;
-        s1.physicsBodyType = Phaser.Physics.ARCADE;
-        s1.physicsBodyType.immovable = true; 
-        s1.body.collideWorldBounds = true;
-        s1.body.customSeparateX = true;
-        s1.body.customSeparateY = true;
     
-        s2 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
-        game.physics.enable(s2, Phaser.Physics.ARCADE);
-        s2.enableBody = true;
-        s2.physicsBodyType = Phaser.Physics.ARCADE;
-        s2.physicsBodyType.immovable = true; 
-        s2.body.collideWorldBounds = true;
-        s2.body.customSeparateX = true;
-        s2.body.customSeparateY = true;
-    
-        s3 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
-        game.physics.enable(s3, Phaser.Physics.ARCADE);
-        s3.enableBody = true;
-        s3.physicsBodyType = Phaser.Physics.ARCADE;
-        s3.physicsBodyType.immovable = true; 
-        s3.body.collideWorldBounds = true;
-        s3.body.customSeparateX = true;
-        s3.body.customSeparateY = true;
-    
-        s4 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
-        game.physics.enable(s4, Phaser.Physics.ARCADE);
-        s4.enableBody = true;
-        s4.physicsBodyType = Phaser.Physics.ARCADE;
-        s4.physicsBodyType.immovable = true; 
-        s4.body.collideWorldBounds = true;
-        s4.body.customSeparateX = true;
-        s4.body.customSeparateY = true;
-    
-        s5 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
-        game.physics.enable(s5, Phaser.Physics.ARCADE);
-        s5.enableBody = true;
-        s5.physicsBodyType = Phaser.Physics.ARCADE;
-        s5.physicsBodyType.immovable = true; 
-        s5.body.collideWorldBounds = true;
-        s5.body.customSeparateX = true;
-        s5.body.customSeparateY = true;
-//    }
+//        s1 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+//        game.physics.enable(s1, Phaser.Physics.ARCADE);
+//        s1.enableBody = true;
+//        s1.physicsBodyType = Phaser.Physics.ARCADE;
+//        s1.physicsBodyType.immovable = true; 
+//        s1.body.collideWorldBounds = true;
+//        s1.body.customSeparateX = true;
+//        s1.body.customSeparateY = true;
+//    
+//        s2 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+//        game.physics.enable(s2, Phaser.Physics.ARCADE);
+//        s2.enableBody = true;
+//        s2.physicsBodyType = Phaser.Physics.ARCADE;
+//        s2.physicsBodyType.immovable = true; 
+//        s2.body.collideWorldBounds = true;
+//        s2.body.customSeparateX = true;
+//        s2.body.customSeparateY = true;
+//    
+//        s3 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+//        game.physics.enable(s3, Phaser.Physics.ARCADE);
+//        s3.enableBody = true;
+//        s3.physicsBodyType = Phaser.Physics.ARCADE;
+//        s3.physicsBodyType.immovable = true; 
+//        s3.body.collideWorldBounds = true;
+//        s3.body.customSeparateX = true;
+//        s3.body.customSeparateY = true;
+//    
+//        s4 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+//        game.physics.enable(s4, Phaser.Physics.ARCADE);
+//        s4.enableBody = true;
+//        s4.physicsBodyType = Phaser.Physics.ARCADE;
+//        s4.physicsBodyType.immovable = true; 
+//        s4.body.collideWorldBounds = true;
+//        s4.body.customSeparateX = true;
+//        s4.body.customSeparateY = true;
+//    
+//        s5 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+//        game.physics.enable(s5, Phaser.Physics.ARCADE);
+//        s5.enableBody = true;
+//        s5.physicsBodyType = Phaser.Physics.ARCADE;
+//        s5.physicsBodyType.immovable = true; 
+//        s5.body.collideWorldBounds = true;
+//        s5.body.customSeparateX = true;
+//        s5.body.customSeparateY = true;
+    }
     
     //collision test//
     bullets = game.add.group();
@@ -139,11 +141,11 @@ function update() {
     }
     
     game.physics.arcade.overlap(bullets,squirrels,collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
-    game.physics.arcade.overlap(bullets,s1,collisionHandler, null, this);
-    game.physics.arcade.overlap(bullets,s2,collisionHandler, null, this);
-    game.physics.arcade.overlap(bullets,s3,collisionHandler, null, this);
-    game.physics.arcade.overlap(bullets,s4,collisionHandler, null, this);
-    game.physics.arcade.overlap(bullets,s5,collisionHandler, null, this);
+//    game.physics.arcade.overlap(bullets,s1,collisionHandler, null, this);
+//    game.physics.arcade.overlap(bullets,s2,collisionHandler, null, this);
+//    game.physics.arcade.overlap(bullets,s3,collisionHandler, null, this);
+//    game.physics.arcade.overlap(bullets,s4,collisionHandler, null, this);
+//    game.physics.arcade.overlap(bullets,s5,collisionHandler, null, this);
 
     game.physics.arcade.overlap(squirrels, star, cupCollision, null, this);
 
