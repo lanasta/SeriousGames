@@ -150,8 +150,9 @@ function collisionHandler (squirrels, bullets) {
     
 function cupCollision (cup, squirrels) {
     cup.kill()
-    score -=
+    score -= 5
     scoreText.text = 'Score:' + score;
+    squirrels.respawn()
 }
 
 </script>
