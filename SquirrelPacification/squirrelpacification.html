@@ -47,6 +47,7 @@ var scoreText;
 function create() {
     
     game.physics.startSystem(Phaser.Physics.ARCADE);
+    game.physics.arcade.gravity.y=0
     game.physics.arcade.gravity.y=13
 
     game.add.image(0, 0, 'background');
@@ -62,6 +63,7 @@ function create() {
     star.enableBody = true;
     star.body.collideWorldBounds = true;
     
+<<<<<<< HEAD
     squirrels = game.add.sprite(100, 300, 'squirrel');
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     squirrels.enableBody = true;
@@ -72,6 +74,63 @@ function create() {
     
     squirrelGang = game.add.group();
     
+=======
+ //   for (var i=0; i < totalSquirrels; i++) {
+        squirrels = game.add.sprite(game.world.width, game.world.randomY, 'squirrel');
+        game.physics.enable(squirrels, Phaser.Physics.ARCADE);
+        squirrels.enableBody = true;
+        squirrels.physicsBodyType = Phaser.Physics.ARCADE;
+        squirrels.physicsBodyType.immovable = true; 
+        squirrels.body.collideWorldBounds = true;
+        squirrels.body.customSeparateX = true;
+        squirrels.body.customSeparateY = true;
+        
+        s1 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+        game.physics.enable(s1, Phaser.Physics.ARCADE);
+        s1.enableBody = true;
+        s1.physicsBodyType = Phaser.Physics.ARCADE;
+        s1.physicsBodyType.immovable = true; 
+        s1.body.collideWorldBounds = true;
+        s1.body.customSeparateX = true;
+        s1.body.customSeparateY = true;
+    
+        s2 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+        game.physics.enable(s2, Phaser.Physics.ARCADE);
+        s2.enableBody = true;
+        s2.physicsBodyType = Phaser.Physics.ARCADE;
+        s2.physicsBodyType.immovable = true; 
+        s2.body.collideWorldBounds = true;
+        s2.body.customSeparateX = true;
+        s2.body.customSeparateY = true;
+    
+        s3 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+        game.physics.enable(s3, Phaser.Physics.ARCADE);
+        s3.enableBody = true;
+        s3.physicsBodyType = Phaser.Physics.ARCADE;
+        s3.physicsBodyType.immovable = true; 
+        s3.body.collideWorldBounds = true;
+        s3.body.customSeparateX = true;
+        s3.body.customSeparateY = true;
+    
+        s4 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+        game.physics.enable(s4, Phaser.Physics.ARCADE);
+        s4.enableBody = true;
+        s4.physicsBodyType = Phaser.Physics.ARCADE;
+        s4.physicsBodyType.immovable = true; 
+        s4.body.collideWorldBounds = true;
+        s4.body.customSeparateX = true;
+        s4.body.customSeparateY = true;
+    
+        s5 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
+        game.physics.enable(s5, Phaser.Physics.ARCADE);
+        s5.enableBody = true;
+        s5.physicsBodyType = Phaser.Physics.ARCADE;
+        s5.physicsBodyType.immovable = true; 
+        s5.body.collideWorldBounds = true;
+        s5.body.customSeparateX = true;
+        s5.body.customSeparateY = true;
+//    }
+>>>>>>> origin/master
     
     //collision test//
     bullets = game.add.group();
@@ -105,6 +164,7 @@ function update() {
         fire();
     }
     
+<<<<<<< HEAD
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this); 
     // if bombs overlap with player then call bombHitsPlayer function
 
@@ -112,12 +172,25 @@ function update() {
     
   
 
+=======
+    game.physics.arcade.overlap(bullets,squirrels,collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+    game.physics.arcade.overlap(bullets,s1,collisionHandler, null, this);
+    game.physics.arcade.overlap(bullets,s2,collisionHandler, null, this);
+    game.physics.arcade.overlap(bullets,s3,collisionHandler, null, this);
+    game.physics.arcade.overlap(bullets,s4,collisionHandler, null, this);
+    game.physics.arcade.overlap(bullets,s5,collisionHandler, null, this);
+
+    game.physics.arcade.overlap(squirrels, star, cupCollision, null, this);
+
+//    game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);      // if bombs overlap with player then call bombHitsPlayer function
+>>>>>>> origin/master
 }
     
 
     
 
 function fire() {
+<<<<<<< HEAD
 
     if (game.time.now > nextFire && bullets.countDead() > 0)
     {
@@ -125,21 +198,35 @@ function fire() {
         var bullet = bullets.getFirstDead();
         bullet.reset(player.x + 100, player.y + 30);
         game.physics.arcade.moveToPointer(bullet, 350);   
+=======
+    if (game.time.now > nextFire && bullets.countDead() > 0)
+    {
+        bullet = bullets.getFirstExists(false);
+        if (bullet) {
+            nextFire = game.time.now + fireRate;
+            bullet.reset(player.x - 100, player.y - 65);
+            game.physics.arcade.moveToPointer(bullet, 350);  
+        } 
+>>>>>>> origin/master
     }
 }
     
  
 
 function render() {
-    game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
-    game.debug.spriteInfo(player, 32, 450);
-    game.debug.spriteInfo(star, 32, 450); 
+	for (var i = 0; i < totalSquirrels; i++ ) {
+		game.debug.body(squirrels.children[i]);
+	}
+//     game.debug.text('Active Bullets: ' + bullets.countLiving() + ' / ' + bullets.total, 32, 32);
+//     game.debug.spriteInfo(player, 32, 450);
+//     game.debug.spriteInfo(star, 32, 450); 
 }
 
 function processHandler (bullets, squirrels) {
     return true;
 }
 
+<<<<<<< HEAD
 function collisionHandler (squirrels, bullets) {
         squirrels.kill();
         
@@ -155,6 +242,19 @@ function cupCollision (cup, squirrels) {
     squirrels.respawn()
 }
 
+=======
+function collisionHandler (s, bullets) {
+    if (s.exists) {
+        bullets.kill();
+        s.kill();
+        totalSquirrels--;
+    }
+}
+    
+function cupCollision (squirrels, star) {
+    star.kill();
+}
+>>>>>>> origin/master
 </script>
 
 </body>
