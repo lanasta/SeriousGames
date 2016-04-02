@@ -57,10 +57,6 @@ function create() {
     game.physics.enable(star);
     star.enableBody = true;
     star.body.collideWorldBounds = true;
-    
-    for (var i=0; i < totalSquirrels; i++) {
-        squirrels - game.add.group();
-        game.squirrels.enableBody = true;
         
 // what is this?
 //    squirrels = game.add.sprite(100, 300, 'squirrel');
@@ -72,15 +68,16 @@ function create() {
 //    squirrels.body.collideWorldBounds = true;
     
     squirrelGang = game.add.group();
-//   for (var i=0; i < totalSquirrels; i++) {
-//        squirrels = game.add.sprite(game.world.width, game.world.randomY, 'squirrel');
-//        game.physics.enable(squirrels, Phaser.Physics.ARCADE);
-//        squirrels.enableBody = true;
-//        squirrels.physicsBodyType = Phaser.Physics.ARCADE;
-//        squirrels.physicsBodyType.immovable = true; 
+    squirrelGang.enableBody = true;
+    squirrelGang.physicsBodyType = Phaser.Physics.ARCADE;
+    for (var i=0; i < totalSquirrels; i++) {
+        squirrels = game.squirrelGang.create(game.world.randomX, game.world.randomY, 'squirrel', true)
 //        squirrels.body.collideWorldBounds = true;
 //        squirrels.body.customSeparateX = true;
 //        squirrels.body.customSeparateY = true;
+//        squirrels = game.add.sprite(game.world.width, game.world.randomY, 'squirrel');
+//        squirrels.physicsBodyType.immovable = true; 
+
 //    
 //        s1 = game.add.sprite(game.world.randomX, game.world.randomY, 'squirrel');
 //        game.physics.enable(s1, Phaser.Physics.ARCADE);
