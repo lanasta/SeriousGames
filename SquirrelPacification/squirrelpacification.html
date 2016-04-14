@@ -24,7 +24,7 @@ function preload() {
     game.load.image('ground', 'assets/ground.png');
     game.load.image('tree', 'assets/tree.png');
     game.load.image('cup', 'assets/cometdoes.png');
-//    game.load.image('titlescreen', 'assets/TitleBG.png');
+    game.load.image('titlescreen', 'assets/TitleBG.png');
 }
 
 var sprite;
@@ -47,8 +47,8 @@ var gameover;
 var overmessage;
 var countdown;
     
-//var startBG;
-//var startPrompt;
+var startBG;
+var startPrompt;
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -119,11 +119,11 @@ function create() {
     
     // start screen
 //    game.state.add('StartMenu', StartMenu);
-//    startBG = game.add.image(0, 0, 'titlescreen');
-//    startBG.inputEnabled = true;
-//    startBG.events.onInputDown.addOnce(startGame, this);
-//    startPrompt = game.add.text(game.world.centerX, game.world.centerY, 'Touch to Start!', {fontSize: '30', fill: 'yellow'})
-//    startPrompt.anchor.x = Math.round(startPrompt.width * 0.5) / startPrompt.width;
+    startBG = game.add.image(0, 0, 'titlescreen');
+    startBG.inputEnabled = true;
+    startBG.events.onInputDown.addOnce(startGame, this);
+    startPrompt = game.add.text(game.world.centerX, game.world.centerY, 'Touch to Start!', {fontSize: '30', fill: 'yellow'})
+    startPrompt.anchor.x = Math.round(startPrompt.width * 0.5) / startPrompt.width;
 }
 
 function update() {
@@ -184,21 +184,22 @@ function checkSquirrelsLeft() {
         countdown.setText('Squirrels Left 0');
         overmessage = game.add.text(game.world.centerX, game.world.centerY, 'GAME OVER', {fontSize: '42', fill: 'red'});
         overmessage.anchor.x = Math.round(overmessage.width * 0.5) / overmessage.width;  
-//        overmessage.inputEnabled = true;
-//        overmessage.events.onInputDown.addOnce(quitGame, this);
+        overmessage.inputEnabled = true;
+        overmessage.events.onInputDown.addOnce(quitGame, this);
     }
     else {
          countdown.setText('Squirrels Left ' + totalSquirrels);
     }
 }
     
-//function startGame(pointer) {
-//    game.state.start('game');
-//}
-//
-//function quitGame(pointer) {
-//    game.state.start('StartMenu');
-//}
+function startGame(pointer) {
+    alert("HERE");
+    game.state.start('game');
+}
+
+function quitGame(pointer) {
+    game.state.start('StartMenu');
+}
 </script>
 
 </body>
