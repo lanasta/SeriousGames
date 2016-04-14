@@ -118,7 +118,7 @@ function create() {
     countdown = game.add.text(10, 10, 'Squirrels Left ' + totalSquirrels, {fontSize: '20px', fill: 'red'});
     
     // start screen
-//    game.state.add('StartMenu', StartMenu);
+    game.state.add('StartMenu', StartMenu);
     startBG = game.add.image(0, 0, 'titlescreen');
     startBG.inputEnabled = true;
     startBG.events.onInputDown.addOnce(startGame, this);
@@ -194,7 +194,7 @@ function checkSquirrelsLeft() {
     
 function startGame(pointer) {
     alert("HERE");
-    game.state.start('game');
+    game.state.start('squirrelpacification');
 }
 
 function quitGame(pointer) {
