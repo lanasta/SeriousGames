@@ -61,10 +61,9 @@ function create() {
     
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
     
-     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
+    endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
     endText.anchor.setTo(0.5, 0.5);
     endText.visible = false;
-
 
     //cups = game.add.sprite(game.world.randomX, 600, 'cup');
     //game.physics.enable(cups);
@@ -90,10 +89,8 @@ function create() {
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     
-      game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
+    game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
     
-   
-
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -200,7 +197,6 @@ function checkSquirrelsLeft() {
     }
 }
     
-<<<<<<< HEAD
 function startGame(pointer) {
     alert("HERE");
     game.state.start('squirrelpacification');
@@ -208,27 +204,15 @@ function startGame(pointer) {
 
 function quitGame(pointer) {
     game.state.start('StartMenu');
-=======
-//function startGame(pointer) {
-//    game.state.start('game');
-//}
-//
-//function quitGame(pointer) {
-//    game.state.start('StartMenu');
-//}
-
-function createSquirrels(){
+}
     
-    for (var i = 0; i < 10; i++)
-    {
+function createSquirrels(){    
+    for (var i = 0; i < 10; i++)  {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);
-        
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);   
     };
-
->>>>>>> origin/master
 }
 </script>
 
