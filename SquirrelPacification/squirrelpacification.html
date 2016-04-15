@@ -15,8 +15,9 @@
 <script type="text/javascript">
 
 var game = new Phaser.Game(1000, 750, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
-    
+
 function preload() {
+
     game.load.image('phaser', 'assets/sgt animaltalker.png');
     game.load.image('bullet', 'assets/acorn1.png');
     game.load.spritesheet('squirrels', 'assets/evilSquirrel.png', 60, 60);
@@ -24,13 +25,11 @@ function preload() {
     game.load.image('ground', 'assets/ground.png');
     game.load.image('tree', 'assets/tree.png');
     game.load.image('cup', 'assets/cometdoes.png');
-    game.load.image('titlescreen', 'assets/TitleBG.png');
 }
 
 var sprite;
 var bullets;
 var squirrels;
-var totalSquirrels = 10;
 var cursors;
 var cups
 
@@ -43,13 +42,8 @@ var total = 0;
 var timer = 0;
 var stateText;
 var endText
-    
-var gameover;
-var overmessage;
-var countdown;
-    
-var startBG;
-var startPrompt;
+var squirrelLaunchTimer
+
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -59,43 +53,56 @@ function create() {
     game.add.image(0,650, 'ground');
     game.add.image(0, 120, 'tree');
     
+    
+    
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
     
     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
     endText.anchor.setTo(0.5, 0.5);
     endText.visible = false;
 
+    
+    
+   
     //cups = game.add.sprite(game.world.randomX, 600, 'cup');
-    //game.physics.enable(cups);
-    //cups.enableBody = true;
+   //  game.physics.enable(cups);
+   // cups.enableBody = true;
     //cups.body.collideWorldBounds = true;
     
     cups = game.add.group();
     cups.enableBody = true;
     cups.physicsBodyType = Phaser.Physics.ARCADE;
-    game.physics.enable(cups, Phaser.Physics.ARCADE);
+     game.physics.enable(cups, Phaser.Physics.ARCADE);
+    
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < 10; i++)
+    {
         var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
         d.name = 'cup' + i;
         d.body.immovable = false;
         d.body.velocity.y = 0;
     }
- 
+    
+    
+    
     //  This will check Group vs. Group collision (bullets vs. squirrels!)
 
     squirrels = game.add.group();
     squirrels.enableBody = true;
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
-    game.physics.enable(squirrels, Phaser.Physics.ARCADE);
+     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     
     game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
+
     
+   
+
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
-    for (var i = 0; i < 20; i++) {
+    for (var i = 0; i < 6; i++)
+    {
         var b = bullets.create(0, 0, 'bullet');
         b.name = 'bullet' + i;
         b.exists = false;
@@ -112,20 +119,10 @@ function create() {
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
 
-    // gameover message
-    gameover = false;
-    countdown = game.add.text(10, 10, 'Squirrels Left ' + totalSquirrels, {fontSize: '20px', fill: 'red'});
-    
-//    // start screen
-//    game.state.add('StartMenu', StartMenu);
-//    startBG = game.add.image(0, 0, 'titlescreen');
-//    startBG.inputEnabled = true;
-//    startBG.events.onInputDown.addOnce(startGame, this);
-//    startPrompt = game.add.text(game.world.centerX, game.world.centerY, 'Touch to Start!', {fontSize: '30', fill: 'yellow'})
-//    startPrompt.anchor.x = Math.round(startPrompt.width * 0.5) / startPrompt.width;
 }
 
 function update() {
+
     //  As we don't need to exchange any velocities or motion we can the 'overlap' check instead of 'collide'
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);
     
@@ -143,78 +140,84 @@ function update() {
         endText.visible = true;
         squirrels.removeAll();
     }
-}
+    
+    }
     
 
 function fireBullet () {
-    if (game.time.now > bulletTime) {
+
+    if (game.time.now > bulletTime)
+    {
         bullet = bullets.getFirstExists(false);
 
-        if (bullet) {
-            bullet.reset(sprite.x + 3, sprite.y + 20);
+        if (bullet)
+        {
+            bullet.reset(sprite.x + 6, sprite.y - 8);
             bullet.body.velocity.y = -300;
             bulletTime = game.time.now + 150;
-            game.physics.arcade.moveToPointer(bullet, 350); 
+            game.physics.arcade.moveToPointer(bullet, 200); 
         }
     }
+
 }
 
 //  Called if the bullet goes out of the screen
 function resetBullet (bullet) {
+
     bullet.kill();
+
 }
 
-//  Called if the bullet hits one of the squirrel sprites
-function collisionHandler (bullet, squirrel) {
+//  Called if the bullet hits one of the veg sprites
+function collisionHandler (bullet, veg) {
+
     bullet.kill();
-    squirrel.kill();
-    score += 10;
-    scoreText.text = 'Score:' + score;
-    totalSquirrels--;
-    checkSquirrelsLeft();
+    veg.kill();
+     score += 10;
+        scoreText.text = 'Score:' + score;
+
 }
     
-function cupCollision (cup, squirrel) {
-    cup.kill();
-    squirrel.kill();
+function cupCollision(veg, cups) {
+    veg.kill();
+    cups.kill();
     score -= 5;
     scoreText.text = 'Score:' + score;
-    totalSquirrels--;
-    checkSqurrelsLeft();
+    
+    
+
 }
     
-function checkSquirrelsLeft() {
-    if (totalSquirrels <= 0) {
-        gameover = true;
-        countdown.setText('Squirrels Left 0');
-        overmessage = game.add.text(game.world.centerX, game.world.centerY, 'GAME OVER', {fontSize: '42', fill: 'red'});
-        overmessage.anchor.x = Math.round(overmessage.width * 0.5) / overmessage.width;  
-        overmessage.inputEnabled = true;
-        overmessage.events.onInputDown.addOnce(quitGame, this);
-    }
-    else {
-         countdown.setText('Squirrels Left ' + totalSquirrels);
-    }
+function restart () {
+
+    //  A new level starts
+    
+
+    //  And brings the aliens back from the dead :)
+    squirrels.removeAll();
+    createSquirrels();
+
+    //revives the player
+    cups.respawn();
+    //hides the text
+    stateText.visible = false;
+
 }
     
-//function startGame(pointer) {
-//    alert("HERE");
-//    game.state.start('squirrelpacification');
-//}
-//
-//function quitGame(pointer) {
-//    game.state.start('StartMenu');
-//}
+function createSquirrels(){
     
-function createSquirrels(){    
-    for (var i = 0; i < totalSquirrels; i++)  {
+    for (var i = 0; i < 10; i++)
+    {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);   
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);
+        
     };
+
 }
-</script>
+
+    </script>
 
 </body>
 </html>
