@@ -2,13 +2,14 @@
 <!doctype html>
 <html>
 <head>
-    <title>Example Domain</title>
+    <title>Bunny Hoo Hoo Blackhole</title>
     <meta charset="utf-8" />
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href='https://fonts.googleapis.com/css?family=Bubblegum+Sans' rel='stylesheet' type='text/css'>
     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
     <script type="text/javascript" src = "jquery-2.2.0.js"></script>
+    <link rel="stylesheet" type="text/css" href="normalize.css">
     <style type="text/css">
     body {
         margin: 0;
@@ -18,6 +19,7 @@
         height: auto;
         color: white;
         font-size: 15px;
+        height: 100%;
         background: #7CBCF2;
         background-image:url("../images/sky.jpg");
         background-size: cover;
@@ -26,6 +28,11 @@
         color: #38488f;
         text-decoration: none;
     }
+
+    div.container {
+        display:inline-block;
+      }
+
     @media (max-width: 700px) {
         body {
             background-color: #fff;
@@ -37,48 +44,73 @@
             padding: 1em;
         }
     }
-
-    .outer{
-      width: 100%;
-      height: auto;
-      margin: 0 auto;
-      background: orange;
+    #hbb, #carrot, #cupcake{
+      position: relative;
+      height: 100%;
+      float: left;
     }
 
     #hbb img{
-      width: 28%;
-      margin: 1% 32% 0;
+      width: 25%;
       height: auto;
-      position: absolute;
-      padding: 0 3%;
-      border: 35px inset brown;
-      background: linear-gradient(lightpink,plum,lightblue,pink);
+      margin: 3% 37%;
+      padding: 0 1%:
+      float: left;
+      border: 20px inset brown;
+      background: linear-gradient(pink,white);
       box-shadow: 2px 2px 20px gray;
     }
 
-    #carrot img{
-      width: 10%:
+    .carrot #carrot1, .carrot #carrot2, .carrot #carrot3, .carrot #carrot4{
       height: auto;
-      z-index: 2;
-      margin: 36% 40% 0;
-      position: absolute;
+      float: left;
+      display: inline-block;
+      z-index: 3000;
+      cursor: pointer;
+    }
+
+    #carrot1 img{
+      margin-top: -700px;
+      margin-left: 500px;
+      cursor: pointer;
+    }
+
+    #carrot2 img{
+      margin-left: 500px;
+      margin-top: -70px;
+      cursor: pointer;
+    }
+
+    #carrot3 img{
+      margin-left: 460px;
+      margin-top: -700px;
+      cursor: pointer;
+    }
+
+    #carrot4 img{
+      margin-left: 460px;
+      margin-top: -70px;
       cursor: pointer;
     }
 
     #cupcake img{
-      max-width: 90px;
+      max-width: 150px;
+      float: left;
       height: auto;
+      margin-top: -160px;
+      margin-left: 770px;
       z-index: 2;
-      margin: 36.5% 50% 0;
-      position: absolute;
+      position: relative;
       cursor: pointer;
     }
 
     #counter{
       float:left;
-      position:absolute;
-      z-index: 1000;
-      margin-left: 100px;
+      position: relative;
+      z-index: 1;
+      margin-left: 300px;
+      margin-top: -650px;
+      display: inline-block;
     }
 
     #counter p{
@@ -90,13 +122,13 @@
     }
 
     #healthBar{
-      float:right;
-      position:absolute;
+      float:left;
+      position:relative;
       z-index:1000;
-      margin-left: 1100px;
-      width: 5%;
+      width: 50px;
       height: 200px;
-      margin-top: 100px;
+      margin-top: -550px;
+      margin-left: -75px;
       border-radius: 25px;
       border: 5px solid black;
       background:green;
@@ -104,17 +136,21 @@
     }
 
     #unhealthy{
+      float:left;
+      position:relative;
       background:red;
       height: 150px;
       border-radius: 25px;
+      display: inline-block;
     }
 
     #label{
       float:right;
-      position:absolute;
+      position:relative;
       z-index:1000;
-      margin-top: 50px;
-      margin-left: 1110px;
+      display: inline-block;
+      margin-top: -600px;
+      margin-left: 300px;
     }
 
     #label h3:nth-child(2){
@@ -125,15 +161,23 @@
     </style>
     <script>
     window.onload = function() {
+      /*$("#carrot1 img").hide();
+      $("#carrot2 img").hide();
+      $("#carrot3 img").hide();
+      $("#carrot4 img").hide();*/
       var mouthOpen = false;
       var count = 0;
       var alive = true;
       var audio = new Audio('chomp.mp3');
+      var carrot = Math.floor((Math.random() * 4) + 1);
+      var carrotID = "#carrot" + carrot;
+      //$(carrotID + " img").show();
+
 
       $("#cupcake img").click(function(){
         if (!mouthOpen && alive){
-         if ($("#hbb img").attr("src") !== "hbb2.png"){
-          $("#hbb img").attr("src","hbb2.png");
+         if ($("#hbb img").attr("src") !== "hb2.png"){
+          $("#hbb img").attr("src","hb2.png");
           audio.play();
           count += 1;
           mouthOpen = true;
@@ -148,12 +192,12 @@
           var timeBeforeDisgusted = timeOpen - disgustedTime;
           setTimeout(function () {
             if (alive){
-              $("#hbb img").attr("src","hbb3.png");
+              $("#hbb img").attr("src","hb3.png");
             }
             setTimeout(function () {
               mouthOpen = false;
               if (alive){
-                $("#hbb img").attr("src","hbb1.png");
+                $("#hbb img").attr("src","hb1.png");
               }
             }, disgustedTime*1000);
           }, timeBeforeDisgusted*1000);
@@ -174,13 +218,17 @@
            $("#counter").html("<p>"+counter+"</p>");
            $("#counter").css("color","red");
          }
-         $(this).animate({ "bottom": "+=360px","left":"-=5px","max-width":"25px"}, 50 );
+         /*$(this).animate({ "bottom": "+=360px","left":"-=5px","max-width":"25px"}, 50 );
          $(this).fadeOut(50);
          $(this).animate({ "bottom": "-=360px","left":"+=5px","max-width":"90px" }, 0 );
-         $(this).fadeIn(3);
+         $(this).fadeIn(3);*/
       });
       var counter = 0;
+
       $("#carrot img").click(function(){
+            $("#carrot img").hide();
+            makeCarrot();
+            $("#carrot img").show();
           if (mouthOpen && alive){
             audio.play();
             counter+=1;
@@ -189,20 +237,20 @@
             var unhealth = parseInt($("#unhealthy").height());
             var heightToSet = unhealth - 1;
             $("#unhealthy").css("height",heightToSet);
-            $(this).animate({ "bottom": "+=360px","left":"+=140px","width":"2%"}, 50 );
+            /*$(this).animate({ "bottom": "+=360px","left":"+=140px","width":"2%"}, 50 );
             $(this).fadeOut(50);
             $(this).animate({ "bottom": "-=360px","left":"-=140px","width":"8%" }, 0 );
-            $(this).fadeIn(3);
+            $(this).fadeIn(3);*/
           }
           else{
             counter -= 1;
             $("#counter").html("<p>"+counter+"</p>");
             $("#counter").css("color","red");
-            $("#hbb img").attr("src","tantrum.gif");
+            $("#hbb img").attr("src","hb3.png");
             $("#cupcake img").hide();
             $("#carrot img").hide();
             setTimeout(function(){
-              $("#hbb img").attr("src","hbb1.png");
+              $("#hbb img").attr("src","hb1.png");
               $("#cupcake img").show();
               $("#carrot img").show();
             }, 2500);
@@ -210,21 +258,46 @@
       });
     }
 
+    //7 carrots at fixed positions
+    function makeCarrot(){
+      var time= Math.random();
+      time = 500*time;
+      setTimeout(function(){
+      var top = Math.random();
+      top = top*200;
+      top = top + "px";
+      //window size 50px offset
+      var left = Math.random();
+      left = left*400;
+      left = left + "px";
+      $("#carrot img").css("bottom", top);
+      $("#carrot img").css("left", right);
+      },time);
+    }
+
+
     </script>
 </head>
 
 <body>
 <div>
-    <h2 style="text-align:center;">Bunny Hoo Hoo won't eat her veggies...<br>Help us feed her some!!</h2>
-    <div class = "outer">
-      <div id = "counter"><p>0</p><span id="plusMin"></span></div>
-      <div id = "hbb"><img src="hbb1.png"></div>
-      <div id="carrot"><img id="carrot" src="Carrot.png"></div>
-      <div id="cupcake"><img id="cupcake" src="cupcake.png"></div>
-      <div id ="label"><h3 id="good">Healthy</h3><h3 id="bad">Bout to Die</h3></div>
-      <div id="healthBar"><div id="unhealthy"></div></div>
-  </div>
+    <h2 style="text-align:center; padding-top: 20px;">Bunny Hoo Hoo won't eat her veggies...<br>Help us feed her some!!</h2>
 
+      <div class="container">
+        <div id = "hbb"><img src="hb1.png"></div></div>
+      <div class="container">
+        <div class = "carrot" id="carrot1"><img id="carrot1" src="Carrot.png"></div></div>
+        <div class = "carrot" id="carrot2"><img id="carrot2" src="Carrot.png"></div></div>
+        <div class = "carrot" id="carrot3"><img id="carrot3" src="Carrot.png"></div></div>
+        <div class = "carrot" id="carrot4"><img id="carrot4" src="Carrot.png"></div></div>
+      <div class="container">
+        <div id="cupcake"><img id="cupcake" src="cupcake.png"></div></div>
+      <div class = "container">
+        <div id ="label"><h3 id="good">Healthy</h3><h3 id="bad">Bout to Die</h3></div></div>
+      <div class = "container">
+        <div id="healthBar"><div id="unhealthy"></div></div></div>
+      <div class="counter">
+          <div id = "counter"><p>0</p><span id="plusMin"></span></div></div>
 </div>
 </body>
 </html>
