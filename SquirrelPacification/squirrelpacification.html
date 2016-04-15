@@ -42,6 +42,7 @@ var scoreText;
 var total = 0;
 var timer = 0;
 var stateText;
+var endText
     
 var gameover;
 var overmessage;
@@ -59,6 +60,11 @@ function create() {
     game.add.image(0, 120, 'tree');
     
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
+    
+     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
+    endText.anchor.setTo(0.5, 0.5);
+    endText.visible = false;
+
 
     //cups = game.add.sprite(game.world.randomX, 600, 'cup');
     //game.physics.enable(cups);
@@ -84,13 +90,9 @@ function create() {
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     
-    for (var i = 0; i < totalSquirrels; i++) {
-        var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
-        c.name = 'squirrel' + i;
-        c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);
-        c.even
-    }
+      game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
+    
+   
 
     bullets = game.add.group();
     bullets.enableBody = true;
@@ -137,6 +139,12 @@ function update() {
     
     if (game.input.activePointer.isDown){
         fireBullet();
+    }
+    
+    if (cups.countLiving()== 0 ){
+        endText.text = " Game Over, \n thanks for playing, \n you did really well!!!!!!!!!";
+        endText.visible = true;
+        squirrels.removeAll();
     }
 }
     
@@ -192,6 +200,7 @@ function checkSquirrelsLeft() {
     }
 }
     
+<<<<<<< HEAD
 function startGame(pointer) {
     alert("HERE");
     game.state.start('squirrelpacification');
@@ -199,6 +208,27 @@ function startGame(pointer) {
 
 function quitGame(pointer) {
     game.state.start('StartMenu');
+=======
+//function startGame(pointer) {
+//    game.state.start('game');
+//}
+//
+//function quitGame(pointer) {
+//    game.state.start('StartMenu');
+//}
+
+function createSquirrels(){
+    
+    for (var i = 0; i < 10; i++)
+    {
+        var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
+        c.name = 'veg' + i;
+        c.body.immovable = false;
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);
+        
+    };
+
+>>>>>>> origin/master
 }
 </script>
 
