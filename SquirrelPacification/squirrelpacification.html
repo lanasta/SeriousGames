@@ -17,7 +17,6 @@
 var game = new Phaser.Game(1000, 750, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 function preload() {
-
     game.load.image('phaser', 'assets/sgt animaltalker.png');
     game.load.image('bullet', 'assets/acorn1.png');
     game.load.spritesheet('squirrels', 'assets/evilSquirrel.png', 60, 60);
@@ -44,7 +43,6 @@ var stateText;
 var endText
 var squirrelLaunchTimer
 
-
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
     game.physics.arcade.gravity.y = 0;
@@ -53,16 +51,11 @@ function create() {
     game.add.image(0,650, 'ground');
     game.add.image(0, 120, 'tree');
     
-    
-    
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
     
     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
     endText.anchor.setTo(0.5, 0.5);
     endText.visible = false;
-
-    
-    
    
     //cups = game.add.sprite(game.world.randomX, 600, 'cup');
    //  game.physics.enable(cups);
@@ -72,37 +65,29 @@ function create() {
     cups = game.add.group();
     cups.enableBody = true;
     cups.physicsBodyType = Phaser.Physics.ARCADE;
-     game.physics.enable(cups, Phaser.Physics.ARCADE);
+    game.physics.enable(cups, Phaser.Physics.ARCADE);
     
-
-    for (var i = 0; i < 10; i++)
-    {
+    for (var i = 0; i < 10; i++) {
         var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
         d.name = 'cup' + i;
         d.body.immovable = false;
         d.body.velocity.y = 0;
     }
-    
-    
-    
+      
     //  This will check Group vs. Group collision (bullets vs. squirrels!)
 
     squirrels = game.add.group();
     squirrels.enableBody = true;
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
-     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
+    game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     
     game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
-
-    
-   
 
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
-    for (var i = 0; i < 6; i++)
-    {
+    for (var i = 0; i < 6; i++) {
         var b = bullets.create(0, 0, 'bullet');
         b.name = 'bullet' + i;
         b.exists = false;
@@ -122,7 +107,6 @@ function create() {
 }
 
 function update() {
-
     //  As we don't need to exchange any velocities or motion we can the 'overlap' check instead of 'collide'
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);
     
@@ -131,7 +115,7 @@ function update() {
     //sprite.rotation += 0.01;
     //sprite.rotation = game.physics.arcade.angleToPointer(sprite);
     
-    if (game.input.activePointer.isDown){
+    if (game.input.activePointer.isDown) {
         fireBullet();
     }
     
@@ -139,43 +123,33 @@ function update() {
         endText.text = " Game Over, \n thanks for playing, \n you did really well!!!!!!!!!";
         endText.visible = true;
         squirrels.removeAll();
-    }
-    
-    }
-    
+    }   
+}    
 
 function fireBullet () {
-
-    if (game.time.now > bulletTime)
-    {
+    if (game.time.now > bulletTime) {
         bullet = bullets.getFirstExists(false);
 
-        if (bullet)
-        {
+        if (bullet) {
             bullet.reset(sprite.x + 6, sprite.y - 8);
             bullet.body.velocity.y = -300;
             bulletTime = game.time.now + 150;
             game.physics.arcade.moveToPointer(bullet, 200); 
         }
     }
-
 }
 
 //  Called if the bullet goes out of the screen
 function resetBullet (bullet) {
-
     bullet.kill();
-
 }
 
 //  Called if the bullet hits one of the veg sprites
 function collisionHandler (bullet, veg) {
-
     bullet.kill();
     veg.kill();
-     score += 10;
-        scoreText.text = 'Score:' + score;
-
+    score += 10;
+    scoreText.text = 'Score:' + score;
 }
     
 function cupCollision(veg, cups) {
@@ -183,16 +157,10 @@ function cupCollision(veg, cups) {
     cups.kill();
     score -= 5;
     scoreText.text = 'Score:' + score;
-    
-    
-
 }
     
 function restart () {
-
     //  A new level starts
-    
-
     //  And brings the aliens back from the dead :)
     squirrels.removeAll();
     createSquirrels();
@@ -201,23 +169,17 @@ function restart () {
     cups.respawn();
     //hides the text
     stateText.visible = false;
-
 }
     
-function createSquirrels(){
-    
-    for (var i = 0; i < 10; i++)
-    {
+function createSquirrels(){ 
+    for (var i = 0; i < 10; i++) {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);
-        
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);  
     };
-
 }
-
-    </script>
+</script>
 
 </body>
 </html>
