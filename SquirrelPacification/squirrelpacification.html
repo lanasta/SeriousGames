@@ -125,7 +125,7 @@ function fireBullet () {
         bullet = bullets.getFirstExists(false);
 
         if (bullet) {
-            bullet.reset(sprite.x + 6, sprite.y - 8);
+            bullet.reset(sprite.x, sprite.y + 25);
             bullet.body.velocity.y = -300;
             bulletTime = game.time.now + 150;
             game.physics.arcade.moveToPointer(bullet, 200); 
@@ -152,18 +152,6 @@ function cupCollision(veg, cups) {
     score -= 5;
     scoreText.text = 'Score:' + score;
 }
-    
-//function restart () {
-//    //  A new level starts
-//    //  And brings the aliens back from the dead :)
-//    squirrels.removeAll();
-//    createSquirrels();
-//
-//    //revives the player
-//    cups.respawn();
-//    //hides the text
-//    stateText.visible = false;
-//}
     
 function restart() {
     //  A new level starts
