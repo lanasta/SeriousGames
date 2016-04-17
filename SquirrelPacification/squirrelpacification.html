@@ -66,14 +66,8 @@ function create() {
     cups.enableBody = true;
     cups.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(cups, Phaser.Physics.ARCADE);
-    
-    for (var i = 0; i < 10; i++) {
-        var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
-        d.name = 'cup' + i;
-        d.body.immovable = false;
-        d.body.velocity.y = 0;
-    }
       
+    createCups();
     //  This will check Group vs. Group collision (bullets vs. squirrels!)
 
     squirrels = game.add.group();
@@ -103,7 +97,6 @@ function create() {
     
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
-
 }
 
 function update() {
@@ -119,10 +112,11 @@ function update() {
         fireBullet();
     }
     
-    if (cups.countLiving()== 0 ){
+    if (cups.countLiving() == 0 ){
         endText.text = " Game Over, \n thanks for playing, \n you did really well!!!!!!!!!";
         endText.visible = true;
         squirrels.removeAll();
+        game.input.onTap.addOnce(restart, this);
     }   
 }    
 
@@ -159,25 +153,49 @@ function cupCollision(veg, cups) {
     scoreText.text = 'Score:' + score;
 }
     
-function restart () {
+//function restart () {
+//    //  A new level starts
+//    //  And brings the aliens back from the dead :)
+//    squirrels.removeAll();
+//    createSquirrels();
+//
+//    //revives the player
+//    cups.respawn();
+//    //hides the text
+//    stateText.visible = false;
+//}
+    
+function restart() {
     //  A new level starts
     //  And brings the aliens back from the dead :)
     squirrels.removeAll();
     createSquirrels();
-
-    //revives the player
-    cups.respawn();
+    
+    //revives the cups
+    createCups();
+    score = 0;
+    scoreText.text = 'Score:' + score;
+    
     //hides the text
-    stateText.visible = false;
+    endText.visible = false;
 }
     
-function createSquirrels(){ 
+function createSquirrels() { 
     for (var i = 0; i < 10; i++) {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
         c.body.velocity.y = game.rnd.integerInRange(50, 150);  
     };
+}
+
+function createCups() {
+    for (var i = 0; i < 10; i++) {
+        var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
+        d.name = 'cup' + i;
+        d.body.immovable = false;
+        d.body.velocity.y = 0;
+    }
 }
 </script>
 
