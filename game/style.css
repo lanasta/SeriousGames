@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Inconsolata:400,700);
 /**
  * 100% height layout with header and footer
  * ----------------------------------------------
@@ -15,16 +16,20 @@ html,body {
   background: #7CBCF2;
   background-image:url("../images/sky.jpg");
   background-size: cover;
-  font-family: "Bubblegum Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inconsolata", "Helvetica Neue", Helvetica, Arial, sans-serif;
+	-webkit-user-select: none;
+	 -moz-user-select: -moz-none;
+		-ms-user-select: none;
+				user-select: none;
 }
 
 h1 {
-	font:2em "Bubblegum Sans",serif;
-	margin:0.5em 0;
+	font:1.8vw "Inconsolata",serif;
+	margin:0.5vw 0;
 }
 
 h2 {
-	font:1.25em "Bubblegum Sans",serif;
+	font:1.25em "Inconsolata",serif;
 	margin:0 0 0.5em;
 }
 	h1, h2, a {
@@ -39,25 +44,25 @@ p {
 div#container {
 	position:relative; /* needed for footer positioning*/
 	width:60%;
-  height: 100%;
   margin-left: 20%;
   margin-right: 20%;
 	height:auto !important; /* real browsers */
-	height:100%; /* IE6: treaded as min-height*/
 	min-height:100%; /* real browsers */
 }
 
-div#content{
+
+div#content, div#quizBox{
   position: absolute;
   width: 50%;
   margin: 7% 25%;
+	vertical-align: middle;
 }
 
-
-div#content{
-  position: absolute;
-  width: 50%;
-  margin: 7% 25%;
+div #choices{
+ position: absolute;
+ width: 50%;
+ margin: 55% 0 0 25%;
+ z-index: 300;
 }
 
 div#carrot1{
@@ -113,10 +118,65 @@ div#cupcake{
 
 div#counter{
   position: absolute;
-  width: 100%;
+  width: 50%;
+	float: left;
   margin-top: 30%;
   margin-left: 7%;
   font-size: 10vw;
+}
+
+div#timer{
+	position: absolute;
+	width: 50%;
+	margin-top: 40%;
+	right: 0;
+	z-index: 7;
+}
+
+#time{
+	font-size: 4vw;
+	margin-left: 50%;
+}
+
+#startButton{
+	width: 20%;
+	position: absolute;
+	margin: 3% 42% 0 38%;
+	text-align: center;
+	background: black;
+	border: 5px solid white;
+	cursor: pointer;
+	font-size: 2vw;
+	text-transform: uppercase;
+}
+
+#quizBox img{
+	width: 100%;
+	max-height: 400px;
+	cursor:pointer;
+}
+
+#quizBox ul, #choices ul{
+	padding-left: 0;
+}
+#quizBox ul li, #choices ul li{
+	background: dodgerblue;
+	margin: 2%;
+	padding: 2% 2% 2% 0;
+	list-style-type: none;
+	font-size: 1vw;
+	border-radius: 20px;
+	border: 5px solid skyblue;
+	text-align: center;
+	z-index: 100;
+	position: relative;
+	cursor: pointer;
+}
+
+#choices ul li:hover{
+	border-color: cornflowerblue;
+	background: linear-gradient(lightblue,dodgerblue);
+	box-shadow: 2px 2px 5px gray;
 }
 /*div#header {
 	padding:1em;
@@ -147,3 +207,12 @@ div#footer {
 		padding:1em;
 		margin:0;
 	}
+
+.fa{
+	font-size: 2vw;
+	cursor: pointer;
+}
+
+#volume{
+	display: inline-block;
+}

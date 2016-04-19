@@ -12,6 +12,8 @@
     <script src="typed.js/js/typed.js"></script>
     <script>
   $(function(){
+    var openingSong = new Audio('opening.mp3');
+    openingSong.play();
     var typedSpeed = -50;
     function show(){
       $("#selectYes").show();
@@ -38,34 +40,17 @@
 
 <body>
 <div>
-  <div class="left">
-    <div id ="title">
-        <h1>BAROQUE OMAMA'S MISSION</h1>
-        <img src="images/obama.png">
+    <div id ="container">
+      <div id="content">
+        <div id="title"><h1>BLACK OPS 420</h1></div>
+        <div id="missionMessage">
+        </div>
+        <div id="selectYes">
+         <ul>
+           <a href="game/index1.html"><li>Yes</li></a>
+         </ul>
+       </div>
     </div>
   </div>
-  <div class = "right">
-    <!--<div class="element"></div>
-    <p>Black Ops 420 is a secret crack squad of specialists gathered
-      specifically to prevent disasters that could threaten the United States
-      and/or the world. The squad is under direct command of the President of the United States,
-      Baroque Omama and answer to no other authority in the world.
-      You have just been recruited to the Black Ops 420 squad. Your task is to make sure
-      that you divert the disaster that is about to befall the world. Are you ready?
-      <span>|</span>-->
-  <!--  <h1>Start Game</h1>
-    <p>Get ready to learn!</p>
-    <p>Play <a href="LevelOne.html">Level One</a></p>
-    <p>Go back to the <a href="MainMenu.html">Main Menu</a></p>-->
-     <div id="missionMessage">
-     </div>
-     <div id="selectYes">
-      <ul>
-        <a href="game/index1.html"><li>Yes</li></a>
-      </ul>
-    </div>
-  </div>
-  <div class="empty"></div>
-</div>
 </body>
 </html>

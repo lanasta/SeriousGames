@@ -9,33 +9,35 @@ body {
     margin: 0;
     padding: 0;
     color: white;
-    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Black Ops One", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.left{
-  width: 45%;
-  float: left;
-  height: auto;
-  display: inline-block;
+div#container {
+	position:relative; /* needed for footer positioning*/
+	width:60%;
+  margin-left: 20%;
+  margin-right: 20%;
+	height:auto !important; /* real browsers */
+	min-height:100%; /* real browsers */
+}
+
+
+div#content{
+  position: absolute;
+  width: 50%;
+  margin: 7% 25%;
+	vertical-align: middle;
 }
 
 #title{
   font-family: "Black Ops One",cursive;
-  padding-left: 50px;
   margin: 0 auto;
-  font-size: 2.2em;
+  font-size: 1.6em;
   top: 0;
 }
 
 #title h1{
-  text-shadow: 5px 5px 5px black;
-}
-
-#title img{
-    width: 100px;
-    height: auto;
-    margin-left: 140px;
-    margin-top: -40px;
+  text-shadow: 7px 7px gray;
 }
 
 a:link, a:visited {
@@ -43,26 +45,16 @@ a:link, a:visited {
     text-decoration: none;
 }
 
-.right{
-  float: left;
-  width: 50%;
-  height: auto;
-  display: inline-block;
-  font-family: "Black Ops One",cursive;
-  font-size: 15px;
-  margin-top: 100px;
-}
 #selectYes{
-  width: 20%;
-  margin-left: 40%;
-  margin-right: 40%;
+  width: 100%;
+  position: absolute;
 }
 
 #selectYes ul{
-  margin-top: 50px;
+  margin-top: 10%;
+  margin-left: 30%;
 }
 #selectYes ul li{
-  width: 500px;
   font-size: 1.8em;
   height: 50px;
   background:white;
@@ -89,12 +81,7 @@ a:link, a:visited {
   text-decoration: none;
 }
 
-.empty{
-  width: 5%;
-  margin: 0 auto;
-  height: auto;
-  display: inline-block;
-}
+
 
 @media (max-width: 700px) {
     body {

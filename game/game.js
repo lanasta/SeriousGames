@@ -1,13 +1,37 @@
 $( document ).ready(function() {
+  var backgroundMusic = new Audio('happy.mp3');  //Property of monkeyman535 http://www.freesound.org/people/monkeyman535/sounds/326639/
+  backgroundMusic.volume = 0.4;
+  var music = setInterval(function(){
+    backgroundMusic.play();
+  },2400);
+  $(".fa-volume-up").hide();
+  $(".fa-volume-off").click(function(){
+    backgroundMusic.volume = 0.0;
+    $(this).hide();
+    $(".fa-volume-up").show();
+  });
+  $("#volume .fa-volume-up").click(function(){
+    backgroundMusic.volume = 0.4;
+    $(this).hide();
+    $(".fa-volume-off").show();
+  });
   $("#carrot1").hide();
   $("#carrot2").hide();
   $("#carrot3").hide();
   $("#carrot4").hide();
-
+  $("#cupcake").hide();
+  $("#startButton").click(function(){
+    $("#startButton").hide();
+    $("#cupcake").show();
+    var minutes = 60 * 1,
+        display = document.querySelector('#time');
+    startTimer(minutes, display);
+  });
   var whichCarrot = Math.floor((Math.random() * 4) + 1);
   var carrotID = "#carrot" + whichCarrot;
   var count = 0;
   var audio = new Audio('chomp.mp3');
+  var mad = new Audio('grunt.mp3');
   var alive = true;
   var mouthOpen = false;
 
@@ -78,6 +102,7 @@ function feedCarrot(){
         $("#counter").css("color","lightgreen");
       }
       else{
+        mad.play();
         counter -= 1;
         $("#counter").html("<p>"+counter+"</p>");
         $("#counter").css("color","red");
@@ -97,24 +122,23 @@ function makeCarrot(){
   carrotID = "#carrot" + whichCarrot;
 }
 
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    var ti = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
 
-  //$(carrotID).show();
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-/*  $("#carrot1").click(function(){
-      alert('hi');
-  });
+        display.textContent = minutes + ":" + seconds;
 
-  $("#carrot2").click(function(){
-      alert('hi');
-  });
-
-  $("#carrot3").click(function(){
-      alert('hi');
-  });
-
-  $("#carrot4").click(function(){
-      alert('hi');
-  });*/
+        if (--timer < 0) {
+          clearInterval(ti);
+          $("#container").html("<h1 style='font-size: 6vw;'><a style = 'text-decoration: none; color: skyblue; text-shadow: 2px 2px white; font-weight: bold;' href='quiz.html'>On to the next challenge <i style = 'font-size:7vw;' class='fa fa-chevron-circle-right'></i>!</a></h1>");
+        }
+    }, 1000);
+}
 
 
 });
