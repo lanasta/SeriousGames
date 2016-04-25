@@ -41,9 +41,13 @@ var scoreText;
 var total = 0;
 var timer = 0;
 var stateText;
-var endText
-var squirrelLaunchTimer
-var music
+var endText;
+var music;
+    
+var timer;
+var timerEvent;
+var text;
+var timerText;
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -52,20 +56,16 @@ function create() {
     game.add.image(0, 0, 'sky');
     game.add.image(0,650, 'ground');
     game.add.image(0, 120, 'tree');
-   music = game.add.audio('jungle');
+    music = game.add.audio('jungle');
     
     music.play();
     
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
+    timerText = game.add.text(10,200, 'timer: 1:00', {fontSize: '32px', fill: 'red'});
     
     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
     endText.anchor.setTo(0.5, 0.5);
     endText.visible = false;
-   
-    //cups = game.add.sprite(game.world.randomX, 600, 'cup');
-   //  game.physics.enable(cups);
-   // cups.enableBody = true;
-    //cups.body.collideWorldBounds = true;
     
     cups = game.add.group();
     cups.enableBody = true;
@@ -105,6 +105,10 @@ function create() {
     
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+   
+    timer = game.time.create();
+    timerEvent = timer.add(Phaser.Timer.MINUTE * 1, endTimer, this);
+    timer.start();
 }
 
 function update() {
@@ -112,9 +116,6 @@ function update() {
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);
     
     game.physics.arcade.overlap(cups, squirrels, cupCollision, null, this);
-    
-    //sprite.rotation += 0.01;
-    //sprite.rotation = game.physics.arcade.angleToPointer(sprite);
     
     if (game.input.activePointer.isDown) {
         fireBullet();
@@ -125,7 +126,8 @@ function update() {
         endText.visible = true;
         squirrels.removeAll();
         game.input.onTap.addOnce(restart, this);
-    }   
+    } 
+    
 }    
 
 function fireBullet () {
@@ -182,7 +184,7 @@ function createSquirrels() {
         c.name = 'veg' + i;
         c.body.immovable = false;
         c.body.velocity.y = game.rnd.integerInRange(50, 150);  
-    };
+    }
 }
 
 function squirrelWave() {
@@ -191,7 +193,7 @@ function squirrelWave() {
         c.name = 'veg' + i;
         c.body.immovable = false;
         c.body.velocity.y = game.rnd.integerInRange(50, 150);  
-    };
+    }
 }
     
 function squirrelTsunami() {
@@ -200,8 +202,9 @@ function squirrelTsunami() {
         c.name = 'veg' + i;
         c.body.immovable = false;
         c.body.velocity.y = game.rnd.integerInRange(100, 150);  
-    };
+    }
 }
+    
 function createCups() {
     for (var i = 0; i < 10; i++) {
         var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
@@ -210,8 +213,29 @@ function createCups() {
         d.body.velocity.y = 0;
     }
 }
+   
+function render() {
+    if (timer.running) {
+        game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#ff0");
+//        timerText.text = "timer: " + timerText--;
+    }
     
-
+    else {
+        game.debug.text("Done!", 2, 14, "#0f0");
+    }
+}    
+    
+function endTimer() {
+    timer.stop();
+}
+    
+function formatTime(s) {
+    // Convert seconds (s) to a nicely formatted and padded time string
+    var minutes = "0" + Math.floor(s / 60);
+    var seconds = "0" + (s - minutes * 60);
+    return minutes.substr(-2) + ":" + seconds.substr(-2);   
+}
+    
 </script>
 
 </body>
