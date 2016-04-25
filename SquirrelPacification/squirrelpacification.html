@@ -14,7 +14,7 @@
 
 <script type="text/javascript">
 
-var game = new Phaser.Game(1000, 750, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
+var game = new Phaser.Game(1500, 750, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update });
 
 function preload() {
     game.load.image('phaser', 'assets/sgt animaltalker.png');
@@ -24,6 +24,7 @@ function preload() {
     game.load.image('ground', 'assets/ground.png');
     game.load.image('tree', 'assets/tree.png');
     game.load.image('cup', 'assets/cometdoes.png');
+    game.load.audio('jungle', 'assets/jungle.mp3');
 }
 
 var sprite;
@@ -42,6 +43,7 @@ var timer = 0;
 var stateText;
 var endText
 var squirrelLaunchTimer
+var music
 
 function create() {
     game.physics.startSystem(Phaser.Physics.ARCADE);
@@ -50,6 +52,9 @@ function create() {
     game.add.image(0, 0, 'sky');
     game.add.image(0,650, 'ground');
     game.add.image(0, 120, 'tree');
+   music = game.add.audio('jungle');
+    
+    music.play();
     
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
     
@@ -75,13 +80,16 @@ function create() {
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
     
-    game.time.events.repeat(Phaser.Timer.SECOND * 6, 10, createSquirrels, this);
+    game.time.events.repeat(Phaser.Timer.SECOND * 10, 6, squirrelWave, this);
+    game.time.events.add(Phaser.Timer.MINUTE * 1, squirrelTsunami, this);
+    
+    createSquirrels();
 
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
 
-    for (var i = 0; i < 6; i++) {
+    for (var i = 0; i < 10; i++) {
         var b = bullets.create(0, 0, 'bullet');
         b.name = 'bullet' + i;
         b.exists = false;
@@ -90,7 +98,7 @@ function create() {
         b.events.onOutOfBounds.add(resetBullet, this);
     }
 
-    sprite = game.add.sprite(400, 470,'phaser');
+    sprite = game.add.sprite(750, 470,'phaser');
     game.physics.enable(sprite, Phaser.Physics.ARCADE);
     sprite.body.allowRotation = false;
     sprite.body.immovable = true;
@@ -128,7 +136,7 @@ function fireBullet () {
             bullet.reset(sprite.x, sprite.y + 25);
             bullet.body.velocity.y = -300;
             bulletTime = game.time.now + 150;
-            game.physics.arcade.moveToPointer(bullet, 200); 
+            game.physics.arcade.moveToPointer(bullet, 350); 
         }
     }
 }
@@ -177,6 +185,23 @@ function createSquirrels() {
     };
 }
 
+function squirrelWave() {
+    for (var i = 0; i < 20; i++) {
+        var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
+        c.name = 'veg' + i;
+        c.body.immovable = false;
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);  
+    };
+}
+    
+function squirrelTsunami() {
+     for (var i = 0; i < 100; i++) {
+        var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
+        c.name = 'veg' + i;
+        c.body.immovable = false;
+        c.body.velocity.y = game.rnd.integerInRange(100, 150);  
+    };
+}
 function createCups() {
     for (var i = 0; i < 10; i++) {
         var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
@@ -185,6 +210,8 @@ function createCups() {
         d.body.velocity.y = 0;
     }
 }
+    
+
 </script>
 
 </body>
