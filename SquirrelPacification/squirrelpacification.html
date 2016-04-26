@@ -2,7 +2,7 @@
 <html lang="en"> 
 <head> 
 	<meta charset="UTF-8" />
-    <title>Phaser - Making your first game, part 5</title>
+    <title>Squirrel Pacification</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
     <style type="text/css">
         body {
@@ -109,6 +109,8 @@ function create() {
     timer = game.time.create();
     timerEvent = timer.add(Phaser.Timer.MINUTE * 1, endTimer, this);
     timer.start();
+    
+//    game.time.events.add(Phaser.Timer.MINUTE * 1, endTimer, this);
 }
 
 function update() {
@@ -127,7 +129,7 @@ function update() {
         squirrels.removeAll();
         game.input.onTap.addOnce(restart, this);
     } 
-    
+//        game.debug.text("timer: " + game.time.events.duration, 32, 32);
 }    
 
 function fireBullet () {
@@ -217,12 +219,13 @@ function createCups() {
 function render() {
     if (timer.running) {
         game.debug.text(this.formatTime(Math.round((timerEvent.delay - timer.ms) / 1000)), 2, 14, "#ff0");
-//        timerText.text = "timer: " + timerText--;
     }
     
     else {
         game.debug.text("Done!", 2, 14, "#0f0");
     }
+    
+//    game.debug.text("timer: " + game.time.events.duration, 32, 32);
 }    
     
 function endTimer() {
@@ -233,9 +236,9 @@ function formatTime(s) {
     // Convert seconds (s) to a nicely formatted and padded time string
     var minutes = "0" + Math.floor(s / 60);
     var seconds = "0" + (s - minutes * 60);
-    return minutes.substr(-2) + ":" + seconds.substr(-2);   
+    return minutes.substr(-2) + ":" + seconds.substr(-2);
 }
-    
+
 </script>
 
 </body>
