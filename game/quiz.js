@@ -72,7 +72,7 @@ $( document ).ready(function() {
     if (questionsAsked == totalQuestions){
       successSound.play();
       $("#choices").html("");
-      $("#quizBox").html("<h1>Great job! President Omama approves of you!</h1><img src='obama.png'><br><br><h1><a style = 'text-decoration: none; color: skyblue; text-shadow: 1px 1px white; font-weight: bold;' href='../SquirrelPacification/squirrelpacification.html'>Let's go to the next game!&nbsp;<i class='fa fa-chevron-circle-right'></i></a></h1>");
+      $("#quizBox").html("<h1>Great job! President Omama approves of you!</h1><img src='obama.png'><br><br><h1><a style = 'text-decoration: none; color: dodgerblue; text-shadow: 1px 1px white; font-weight: bold;' href='../SquirrelPacification/squirrelpacification.html'>Play Squirrel Pacification!<i class='fa fa-chevron-circle-right'></i></a><br><a style = 'text-decoration: none; color: dodgerblue; text-shadow: 1px 1px white; font-weight: bold;' href='index1.html'><br>Play Bunny Hoo Hoo!&nbsp;<i class='fa fa-chevron-circle-right'></i></a></h1>");
     }
     else{
       while (asked.indexOf(currentQuestion)>0 && !needToAsk[currentQuestion-1]){
