@@ -1,18 +1,43 @@
-<!doctype html> 
-<html lang="en"> 
-<head> 
+<!doctype html>
+<html lang="en">
+<head>
 	<meta charset="UTF-8" />
     <title>Squirrel Pacification</title>
     <script src="//cdn.jsdelivr.net/phaser/2.2.2/phaser.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <style type="text/css">
         body {
             margin: 0;
+        }
+        #nextChallenge{
+            width: 20%;
+            padding: 1%;
+            position: absolute;
+            margin-left: 40%;
+            margin-right: 40%;
+            margin-top: 20%;
+            color: red;
+            font-family: 'Arial';
+            font-size: 32px;
+            text-align: center;
+            border: black 8px dotted;
+            border-radius: 15px;
+            font-weight: bold;
+
+        }
+        
+        #nextChallenge a{
+            color: inherit;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
 <script type="text/javascript">
+
+$(document).ready(function() {
+    $("#nextChallenge").hide();
 
 var game = new Phaser.Game(1500, 750, Phaser.AUTO, 'phaser-example', { preload: preload, create: create, update: update});
 
@@ -36,7 +61,7 @@ var cups
 
 var bulletTime = 0;
 var bullet;
-    
+
 var score = 0;
 var scoreText;
 var total = 0;
@@ -44,9 +69,11 @@ var timer = 0;
 var stateText;
 var endText;
 var music;
-    
+
 var timer;
 var timerText;
+
+
 
 var button;
 var started = false;
@@ -59,20 +86,20 @@ function create() {
     game.add.image(0,650, 'ground');
     game.add.image(0, 120, 'tree');
     music = game.add.audio('jungle');
-    
+
     music.play();
-    
+
     scoreText = game.add.text(16, 300, 'score: 0', { fontSize: '32px', fill: 'red'});
-    
+
     endText = game.add.text(game.world.centerX,game.world.centerY,' ', { font: '84px Arial', fill: '#fff' });
     endText.anchor.setTo(0.5, 0.5);
     endText.visible = false;
-    
+
     cups = game.add.group();
     cups.enableBody = true;
     cups.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(cups, Phaser.Physics.ARCADE);
-      
+
     createCups();
     //  This will check Group vs. Group collision (bullets vs. squirrels!)
 
@@ -80,7 +107,7 @@ function create() {
     squirrels.enableBody = true;
     squirrels.physicsBodyType = Phaser.Physics.ARCADE;
     game.physics.enable(squirrels, Phaser.Physics.ARCADE);
-    
+
     bullets = game.add.group();
     bullets.enableBody = true;
     bullets.physicsBodyType = Phaser.Physics.ARCADE;
@@ -98,53 +125,53 @@ function create() {
     game.physics.enable(sprite, Phaser.Physics.ARCADE);
     sprite.body.allowRotation = false;
     sprite.body.immovable = true;
-    
+
     cursors = game.input.keyboard.createCursorKeys();
     game.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
-    
+
     timerText = game.add.text(10,200, 'Timer:1:00', {fontSize: '32px', fill: 'red'});
-    
+
     button = game.add.button(game.world.centerX, game.world.centerY, 'startButton', actionOnClick, this);
     button.anchor.setTo(0.5, 0.5);
 }
-    
+
 function actionOnClick () {
     button.visible =! button.visible;
     timer = game.time.create(false);
     timer.add(60000, endTimer, this);
     timer.start();
     started = true;
-    
+
     game.time.events.repeat(Phaser.Timer.SECOND * 10, 6, squirrelWave, this);
     game.time.events.add(Phaser.Timer.MINUTE * 1, squirrelTsunami, this);
-    
+
     createSquirrels();
 }
 
 function update() {
     //  As we don't need to exchange any velocities or motion we can the 'overlap' check instead of 'collide'
     game.physics.arcade.overlap(bullets, squirrels, collisionHandler, null, this);
-    
+
     game.physics.arcade.overlap(cups, squirrels, cupCollision, null, this);
-    
+
     if (game.input.activePointer.isDown) {
         fireBullet();
     }
-    
+
     if (cups.countLiving() == 0 && timer.duration == 0){
 //        endText.text = " Game Over, \n thanks for playing, \n you did really well!!!!!!!!!";
         endText.visible = true;
         squirrels.removeAll();
-        window.location.href = "http://lanasta.github.io/SeriousGames/game/quiz.html";
+        $("#nextChallenge").show();
     }
-    
+
     if (cups.countLiving() != 0 && timer.duration == 0) {
 //        endText.text = " Game Over, \n thanks for playing, \n you did really well!!!!!!!!!";
         endText.visible = true;
         squirrels.removeAll();
-        window.location.href = "http://lanasta.github.io/SeriousGames/game/quiz.html";
+                $("#nextChallenge").show();
     }
-    
+
     if (cups.countLiving() == 0 && timer.duration!= 0) {
         timer.pause();
         endText.text = "Click to continue playing!";
@@ -152,11 +179,11 @@ function update() {
         squirrels.removeAll();
         game.input.onTap.addOnce(restart, this);
     }
-    
+
     if (started == true) {
         timerText.text = "Timer:" + timer.duration/1000, 32, 32
     }
-}    
+}
 
 function fireBullet () {
     if (game.time.now > bulletTime) {
@@ -166,7 +193,7 @@ function fireBullet () {
             bullet.reset(sprite.x, sprite.y + 25);
             bullet.body.velocity.y = -300;
             bulletTime = game.time.now + 150;
-            game.physics.arcade.moveToPointer(bullet, 350); 
+            game.physics.arcade.moveToPointer(bullet, 350);
         }
     }
 }
@@ -183,36 +210,36 @@ function collisionHandler (bullet, veg) {
     score += 10;
     scoreText.text = 'Score:' + score;
 }
-    
+
 function cupCollision(veg, cups) {
     veg.kill();
     cups.kill();
     score -= 5;
     scoreText.text = 'Score:' + score;
 }
-    
+
 function restart() {
     //  A new level starts
     //  And brings the aliens back from the dead :)
     squirrels.removeAll();
     createSquirrels();
-    
+
     //revives the cups
     createCups();
     score = 0;
     scoreText.text = 'Score:' + score;
-    
+
     //hides the text
     endText.visible = false;
     timer.resume();
 }
-    
-function createSquirrels() { 
+
+function createSquirrels() {
     for (var i = 0; i < 10; i++) {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);  
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);
     }
 }
 
@@ -221,19 +248,19 @@ function squirrelWave() {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(50, 150);  
+        c.body.velocity.y = game.rnd.integerInRange(50, 150);
     }
 }
-    
+
 function squirrelTsunami() {
      for (var i = 0; i < 100; i++) {
         var c = squirrels.create(game.world.randomX, 0, 'squirrels', game.rnd.integerInRange(0, 36));
         c.name = 'veg' + i;
         c.body.immovable = false;
-        c.body.velocity.y = game.rnd.integerInRange(100, 150);  
+        c.body.velocity.y = game.rnd.integerInRange(100, 150);
     }
 }
-    
+
 function createCups() {
     for (var i = 0; i < 10; i++) {
         var d = cups.create(game.world.randomX, 600, 'cup', game.rnd.integerInRange(0, 3));
@@ -242,12 +269,13 @@ function createCups() {
         d.body.velocity.y = 0;
     }
 }
-    
+
 function endTimer() {
     timer.stop();
 }
+});
 
 </script>
-
+<div id= "nextChallenge">On to the <a href="http://lanasta.github.io/SeriousGames/game/quiz.html">next challenge</a></div>
 </body>
 </html>
