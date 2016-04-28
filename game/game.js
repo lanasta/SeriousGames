@@ -1,6 +1,7 @@
 $( document ).ready(function() {
   var backgroundMusic = new Audio('happy.mp3');  //Property of monkeyman535 http://www.freesound.org/people/monkeyman535/sounds/326639/
   backgroundMusic.volume = 0.4;
+  $("#howTo").hide();
   var music = setInterval(function(){
     backgroundMusic.play();
   },2400);
@@ -15,12 +16,19 @@ $( document ).ready(function() {
     $(this).hide();
     $(".fa-volume-off").show();
   });
+  $(".fa-question-circle").click(function(){
+    $('#howTo').show();
+  });
+  $("#closeHowTo").click(function(){
+    $("#howTo").hide();
+  });
   $("#carrot1").hide();
   $("#carrot2").hide();
   $("#carrot3").hide();
   $("#carrot4").hide();
   $("#cupcake").hide();
   $("#startButton").click(function(){
+    $(".fa-question-circle").hide();
     $("#startButton").hide();
     $("#cupcake").show();
     var minutes = 60 * 1,
