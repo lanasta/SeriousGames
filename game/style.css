@@ -58,6 +58,20 @@ div#content, div#quizBox{
 	vertical-align: middle;
 }
 
+div #howTo{
+	position: absolute;
+	width: 50%;
+	margin: 10% 23%;
+	vertical-align: middle;
+	z-index: 9999;
+	background: black;
+	padding: 2%;
+	border: solid 5px white;
+	border-radius: 15px;
+	font-size: 1.4vw;
+	color: white;
+}
+
 div #choices{
  position: absolute;
  width: 50%;
@@ -148,6 +162,19 @@ div#timer{
 	cursor: pointer;
 	font-size: 2vw;
 	text-transform: uppercase;
+}
+
+#closeHowTo{
+	position: absolute;
+	right: 1%;
+	bottom: 1%;
+	font-size: 2vw;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	background: black;
+	cursor: pointer;
+	font-size: 1vw;
 }
 
 #quizBox img{
