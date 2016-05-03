@@ -143,7 +143,7 @@ function actionOnClick () {
     started = true;
 
     game.time.events.repeat(Phaser.Timer.SECOND * 10, 6, squirrelWave, this);
-    game.time.events.add(Phaser.Timer.MINUTE * 1, squirrelTsunami, this);
+    game.time.events.add(Phaser.Timer.SECOND * 50, squirrelTsunami, this);
 
     createSquirrels();
 }
