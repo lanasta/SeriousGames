@@ -14,14 +14,14 @@ This is a game that Team Cosmic Fire of COMP585 Spring 2016 created for UNC Neur
 
 ### This game was created by:
  - [Anastasia Lalamentik]
- - [Seth Pyle]
- - [Judy Chung]
+ - [Seth Carter Pyle]
+ - [Judy Mi-So Chung]
  - [Kate Friedheim]
 
  [Anastasia Lalamentik]: <http://github.com/lanasta>
- [Judy Chung]: <http://github.com/judychung>
+ [Judy Mi-So Chung]: <http://github.com/judychung>
  [Kate Friedheim]: <http://github.com/kfriedheim>
-  [Seth Pyle]: <http://github.com/sethcp>
+  [Seth Carter Pyle]: <http://github.com/sethcp>
 [our game]: <http://lanasta.github.io/SeriousGames/GameHomePage.html>
    [game design document]: <https://docs.google.com/document/d/1WbRjoFnO4jQwYjKGOYugXu3Q7ZgdyrZdSxe3mXlyWEs/edit>
    [kickstarter video]: <https://vimeo.com/164607476>
