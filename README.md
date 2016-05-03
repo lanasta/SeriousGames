@@ -12,7 +12,7 @@ This is a game that Team Cosmic Fire of COMP585 Spring 2016 created for UNC Neur
 - Most Absurd Kickstarter Video
 - Yummiest Game (Triple Tie)
 
-### This game was created by:
+### This game was created by the following UNC students:
  - [Anastasia Lalamentik]
  - [Seth Carter Pyle]
  - [Judy Mi-So Chung]
