@@ -7,7 +7,7 @@ This is a game that Team Cosmic Fire of COMP585 Spring 2016 created for UNC Neur
 - Finally, play [our game] and let us know what you think! At the moment, the game is best played on a computer.
 
 
-### Awards Achieved at Serious Games Gamefest Spring 2016:
+### Awards Achieved at Gamefest 2016:
 - Funniest Game
 - Most Absurd Kickstarter Video
 - Yummiest Game (Triple Tie)
