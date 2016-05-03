@@ -4,7 +4,7 @@ This is a game that Team Cosmic Fire of COMP585 Spring 2016 created for UNC Neur
 
 - Our [game design document] contains plans for future implementations and additions to the game.
 - Check out our [kickstarter video]! Enter *"comp585"* as the password.
-- Finally, play [our game] and let us know what you think!
+- Finally, play [our game] and let us know what you think! At the moment, the game is best played on a computer.
 
 ### This game was created by:
  - [Anastasia Lalamentik]
